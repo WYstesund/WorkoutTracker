@@ -1,0 +1,91 @@
+/*
+  Global styles for WorkoutTracker.
+
+  Single global stylesheet by design — no CSS modules, no Tailwind. Every
+  rule lives here and is referenced by class name from components. This keeps
+  the whole visual system reviewable in one place, which matters for a
+  mobile-first app where small spacing/sizing tweaks add up.
+
+  Color system lives in CSS custom properties on :root so we can theme the
+  whole app from one spot. The palette is a near-black dark theme with a
+  yellow-green accent — chosen for high contrast under gym lighting.
+*/
+
+:root {
+  --bg: #0f0f0f;          /* page background, near-black */
+  --surface: #1a1a1a;     /* cards, panels */
+  --surface2: #252525;    /* input field backgrounds (one step lighter) */
+  --primary: #e8ff47;     /* accent: logged sets, progress counter, buttons */
+  --text: #f0f0f0;        /* main text color */
+  --muted: #888;          /* secondary text (labels, timestamps) */
+  --border: #333;         /* subtle dividers */
+  --radius: 10px;         /* shared corner radius for cards/inputs */
+}
+
+/* ---------- Reset / base ---------- */
+
+/* Box-sizing border-box so padding doesn't blow out widths. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  /* iOS-friendly font stack — uses San Francisco on iPhone, falls back
+     cleanly on Android/desktop. */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+
+  /* Remove the grey flash iOS draws on tap for any element. We'll add
+     explicit :active styles later where feedback is wanted. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Layout ---------- */
+
+/*
+  .screen is the per-screen container. Centered, capped at 480px so it
+  reads as a phone-shaped column even on a desktop browser. Bottom padding
+  reserves space for the fixed footer that the session screen will add
+  later — harmless on the home screen.
+*/
+.screen {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 20px 120px;
+}
+
+/* ---------- Home header ---------- */
+
+.home-header {
+  /* Comfortable breathing room above the title so it doesn't crowd the
+     iOS status bar when added to home screen. */
+  padding-top: 16px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  /* Accent the title in the brand color — same hue we'll use for logged
+     sets and the progress counter, so the visual identity stays coherent. */
+  color: var(--primary);
+}
+
+.test-border {
+  border: 2px solid #e8ff47;
+}
